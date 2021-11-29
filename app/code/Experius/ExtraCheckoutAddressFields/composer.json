@@ -1,0 +1,21 @@
+{
+    "name": "experius/module-extracheckoutaddressfields",
+    "description": "",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@experius.nl",
+            "name": "Experius"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Experius\\ExtraCheckoutAddressFields\\": ""
+        }
+    }
+}

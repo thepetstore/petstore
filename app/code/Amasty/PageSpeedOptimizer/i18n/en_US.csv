@@ -1,0 +1,98 @@
+Start,Start
+"Clear Bundle","Clear Bundle"
+"The JS optimization is finished. Please check your website.","The JS optimization is finished. Please check your website."
+"Use Clear Bundle button to roll back the JavaScript optimization.","Use Clear Bundle button to roll back the JavaScript optimization."
+Default,Default
+Disabled,Disabled
+"Enabled (Recommended)","Enabled (Recommended)"
+"Enable (Recommended)","Enable (Recommended)"
+Disable,Disable
+Yes,Yes
+"No (Recommended)","No (Recommended)"
+"Yes (Recommended)","Yes (Recommended)"
+No,No
+Enabled,Enabled
+"You can close the window","You can close the window"
+Homepage,Homepage
+"Category Page","Category Page"
+"Product Page","Product Page"
+Diagnostic,Diagnostic
+Mobile,Mobile
+Desktop,Desktop
+"The server needs to be configured correspondingly for the proper work of the functionality. Please consult the user guide to find additional details.","The server needs to be configured correspondingly for the proper work of the functionality. Please consult the user guide to find additional details."
+"Preparing links","Preparing links"
+"Processing links:","Processing links:"
+"Optimization Finished","Optimization Finished"
+"Please wait...","Please wait..."
+"Select stores to optimize (usually it's unnecessary to optimize more than one store with the same theme/language):","Select stores to optimize (usually it's unnecessary to optimize more than one store with the same theme/language):"
+Next,Next
+"You can add specific pages to javascript bundle (e.g. Checkout page). Every link should be on a new line:","You can add specific pages to javascript bundle (e.g. Checkout page). Every link should be on a new line:"
+Finish,Finish
+"Please, click on the link(s) below to open it.","Please, click on the link(s) below to open it."
+"It can take some time for the page(s) to load. Open all the links if there are several of them.","It can take some time for the page(s) to load. Open all the links if there are several of them."
+"Wait until you get the message You can close the window","Wait until you get the message You can close the window"
+"Please copy the code below and paste it in the 'system=>default' section of the 'app/etc/config.php' file.","Please copy the code below and paste it in the 'system=>default' section of the 'app/etc/config.php' file."
+"If this key already exists, then replace it with the new one.","If this key already exists, then replace it with the new one."
+"In the section 'system=>default=>dev=>js:' enable the following options: merge_files => 1, minify_files => 1, enable_js_bundling=> 1","In the section 'system=>default=>dev=>js:' enable the following options: merge_files => 1, minify_files => 1, enable_js_bundling=> 1"
+"Push changes into your cloud repository","Push changes into your cloud repository"
+"Launch the following CLI commands one by one:","Launch the following CLI commands one by one:"
+"your locales","your locales"
+Recommendations:,Recommendations:
+"Please recheck if JS or CSS causes the problem. If the report shows there's a problem with JS, you can fix it using our extension. Please enable the following features: Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript > Amasty JS Optimization = Enabled Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript > Move JavaScript To Page Bottom = Yes In case the problem is about the CSS files, there's no one-size-fits-all solution. Each case needs a tailored approach. So to solve such issues, you need to hire a developer who will analyze the code and possibly adapt the styles especially for your website.","Please recheck if JS or CSS causes the problem. If the report shows there's a problem with JS, you can fix it using our extension. Please enable the following features: Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript > Amasty JS Optimization = Enabled Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript > Move JavaScript To Page Bottom = Yes In case the problem is about the CSS files, there's no one-size-fits-all solution. Each case needs a tailored approach. So to solve such issues, you need to hire a developer who will analyze the code and possibly adapt the styles especially for your website."
+"Our extension solves this problem. You can easily convert PNG and JPEG images in WebP, a new format developed by Google. Please follow the instructions below to convert your file(s). Go to Content > Google Page Speed Optimizer > Image Folder Optimization Settings. Then add new pattern for the problematic image folder. Enable Create WebP Copy' setting, click on 'Save and Optimize''. That's it!","Our extension solves this problem. You can easily convert PNG and JPEG images in WebP, a new format developed by Google. Please follow the instructions below to convert your file(s). Go to Content > Google Page Speed Optimizer > Image Folder Optimization Settings. Then add new pattern for the problematic image folder. Enable Create WebP Copy' setting, click on 'Save and Optimize''. That's it!"
+"Our extension solves this problem. You can create the copies of these files in the sizes that fit tablets and other mobile devices. To do so, please follow the instruction below: First go to Content > Google Page Speed Optimizer > Image Folder Optimization Settings. Now you need to create Image Settings for the problematic image folder and activate the following settings: Create Image for Mobile - set to Yes Create Image for Tablet - set to Yes. Then to choose the suitable Resize Algorithm. Now the images will be displayed correctly on tablets, smartphones and other mobile devices and weight much less.","Our extension solves this problem. You can create the copies of these files in the sizes that fit tablets and other mobile devices. To do so, please follow the instruction below: First go to Content > Google Page Speed Optimizer > Image Folder Optimization Settings. Now you need to create Image Settings for the problematic image folder and activate the following settings: Create Image for Mobile - set to Yes Create Image for Tablet - set to Yes. Then to choose the suitable Resize Algorithm. Now the images will be displayed correctly on tablets, smartphones and other mobile devices and weight much less."
+"This issue may occur due to incorrect server settings or bad code, so you might need extra help to deal with it. To have it fixed, you should address your sys admin or developer. The specialists will look into potential sources of the problem and solve it.","This issue may occur due to incorrect server settings or bad code, so you might need extra help to deal with it. To have it fixed, you should address your sys admin or developer. The specialists will look into potential sources of the problem and solve it."
+"You can solve this issue, enabling LazyLoad setting in our module. To do so, please got to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Image Optimization > Lazy Load. Now set the ' Use Lazy Loading Images' to Yes. The setting above called 'Lazy Load Settings' allows you to configure lazy Load for every page type individually.","You can solve this issue, enabling LazyLoad setting in our module. To do so, please got to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Image Optimization > Lazy Load. Now set the ' Use Lazy Loading Images' to Yes. The setting above called 'Lazy Load Settings' allows you to configure lazy Load for every page type individually."
+"There is no one-size-fits-all solution to this cases for all Magento sites. Each case needs a tailored approach. So to solve this issue,  you need to hire a developer who will analyze the code and possibly manage to optimize styles especially for your website.","There is no one-size-fits-all solution to this cases for all Magento sites. Each case needs a tailored approach. So to solve this issue,  you need to hire a developer who will analyze the code and possibly manage to optimize styles especially for your website."
+"Our extension solves this problem using special tools for image compression. Before enabling it, you need to make sure you have server utilities for image optimization installed. Here they are: JPEG optimization tool / PNG optimization tool / GIF optimization tool / WebP tool. If you haven't found any tool installed, you'll need to choose the one that suits you best and set it up. Your hosting provider or system administrator can help you with the installation. After you verify that the optimization tools are installed, please go to Content > Google Page Speed Optimizer > Image Folder Optimization Settings. You need to create Image Setting for the probematic image folder and enable Jpeg Tool, Png Tool or Gif Tool settings.","Our extension solves this problem using special tools for image compression. Before enabling it, you need to make sure you have server utilities for image optimization installed. Here they are: JPEG optimization tool / PNG optimization tool / GIF optimization tool / WebP tool. If you haven't found any tool installed, you'll need to choose the one that suits you best and set it up. Your hosting provider or system administrator can help you with the installation. After you verify that the optimization tools are installed, please go to Content > Google Page Speed Optimizer > Image Folder Optimization Settings. You need to create Image Setting for the probematic image folder and enable Jpeg Tool, Png Tool or Gif Tool settings."
+"This feature works as a server tool. Please contact your hosting provider or system administrator and they will activate it for you.","This feature works as a server tool. Please contact your hosting provider or system administrator and they will activate it for you."
+"There is no one-size-fits-all solution to this cases for all Magento sites. Each case needs a tailored approach. So to solve this issue,  you need to hire a developer who will analyze the code and possibly manage to optimize styles especially for your website. ","There is no one-size-fits-all solution to this cases for all Magento sites. Each case needs a tailored approach. So to solve this issue,  you need to hire a developer who will analyze the code and possibly manage to optimize styles especially for your website. "
+"To Minify CSS, please  go to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > CSS > Minify CSS Files and move the switch of this setting to Yes.","To Minify CSS, please  go to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > CSS > Minify CSS Files and move the switch of this setting to Yes."
+"You can minify Javascript files in 2 ways: 1.Navigate to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript and enable 'Amasty JS Optimization'. Now JS files will be optimized automatically including minifying and merging into smart bundles. Please make a full backup of your Magento instance just to be safe if anything goes wrong. Then hit the 'Start' button in the 'Run Optimization' field. It will launch the JS optimization wizard with full what-and-how list. In case you don't want to use this setting, please check the 2nd option. 2. Navigate to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript > Minify JavaScript Files = Yes. Now JS files will be minified.","You can minify Javascript files in 2 ways: 1.Navigate to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript and enable 'Amasty JS Optimization'. Now JS files will be optimized automatically including minifying and merging into smart bundles. Please make a full backup of your Magento instance just to be safe if anything goes wrong. Then hit the 'Start' button in the 'Run Optimization' field. It will launch the JS optimization wizard with full what-and-how list. In case you don't want to use this setting, please check the 2nd option. 2. Navigate to Stores > Configuration > Amasty Extensions > Google Page Speed Optimizer > Settings > JavaScript > Minify JavaScript Files = Yes. Now JS files will be minified."
+"This error means that there are some problems with your server operation. To have it solved, please consult your hosting provider or system administrator.","This error means that there are some problems with your server operation. To have it solved, please consult your hosting provider or system administrator."
+"Something went wrong. Please reload the page.","Something went wrong. Please reload the page."
+"Select at least one store.","Select at least one store."
+"Google Page Speed Optimizer","Google Page Speed Optimizer"
+General,General
+"Enable Module","Enable Module"
+Settings,Settings
+HTML:,HTML:
+"Minify HTML","Minify HTML"
+JavaScript:,JavaScript:
+"Amasty JS Optimization","Amasty JS Optimization"
+"Amasty JS optimization is a unique process that will significantly optimize JavaScript for your Magento website using Advanced JS Bundling feature and JS Minification.<br><br>You will need to use CLI commands to run through the optimization. Please make sure that you have access to the console and know how to do it.<br><br>Please create a full backup of your Magento instance and follow the instructions that are displayed in the 'Run Optimization"" section.","Amasty JS optimization is a unique process that will significantly optimize JavaScript for your Magento website using Advanced JS Bundling feature and JS Minification.<br><br>You will need to use CLI commands to run through the optimization. Please make sure that you have access to the console and know how to do it.<br><br>Please create a full backup of your Magento instance and follow the instructions that are displayed in the 'Run Optimization"" section."
+"Is Magento Cloud","Is Magento Cloud"
+"Run Optimization","Run Optimization"
+"Merge JavaScript Files","Merge JavaScript Files"
+"'bin/magento setup:static-content:deploy' command must be run in the console when any of the settings in the field been changed.","'bin/magento setup:static-content:deploy' command must be run in the console when any of the settings in the field been changed."
+"Enable JavaScript Bundling","Enable JavaScript Bundling"
+"Minify JavaScript Files","Minify JavaScript Files"
+"Include JS of the Admin Area Pages into Merged JS File","Include JS of the Admin Area Pages into Merged JS File"
+"Optimizing the admin area pages sometimes lead to malfunctions and doesn't affect the Google rating","Optimizing the admin area pages sometimes lead to malfunctions and doesn't affect the Google rating"
+"Exclude URLs from JS Bundling and Merge","Exclude URLs from JS Bundling and Merge"
+"Each URL or part of the URL from new line","Each URL or part of the URL from new line"
+"Move JavaScript To Page Bottom","Move JavaScript To Page Bottom"
+"Ignore URL List","Ignore URL List"
+"Ignore Scripts that Contain","Ignore Scripts that Contain"
+CSS:,CSS:
+"Merge CSS Files","Merge CSS Files"
+"Merge CSS Files in Admin Area","Merge CSS Files in Admin Area"
+"Exclude URLs from CSS Merge","Exclude URLs from CSS Merge"
+"Minify CSS Files","Minify CSS Files"
+"Defer Fonts Loading","Defer Fonts Loading"
+"Do Not Defer Fonts That Contain","Do Not Defer Fonts That Contain"
+"Example: Luma-Icons","Example: Luma-Icons"
+"Move Print CSS Files to Page Bottom","Move Print CSS Files to Page Bottom"
+"Flat Tables:","Flat Tables:"
+"Use Flat Catalog Category","Use Flat Catalog Category"
+"Use Flat Catalog Product","Use Flat Catalog Product"
+"Server Push:","Server Push:"
+"Enable Server Push","Enable Server Push"
+"Asset Types to Server Push","Asset Types to Server Push"
+"Exclude URLs from Server Push","Exclude URLs from Server Push"
+"Other Settings:","Other Settings:"
+"Sign Static Files","Sign Static Files"
+"Asynchronous indexing","Asynchronous indexing"
+"JS Files","JS Files"
+"CSS Files","CSS Files"
+"Font Files","Font Files"

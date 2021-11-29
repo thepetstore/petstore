@@ -1,0 +1,16 @@
+<!-- input telephone element and corresponding bindings -->
+<input class="input-text minimum-length-10 validate-length customer_ph_number" type="number" minlength="10"
+data-bind="
+    value: value,
+    valueUpdate: 'keyup',
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        placeholder: placeholder,
+        'aria-describedby': noticeId,
+        id: uid,
+        disabled: disabled
+    }"
+    data-validate="{required:true, 'validate-number':true, 'min_text_length':10}"
+    data-telephone-min-length=10
+    />

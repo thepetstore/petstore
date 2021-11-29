@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_page_speed_optimizer_bundle" resource="default" engine="innodb">
+        <column xsi:type="int" name="filename_id" nullable="false" unsigned="true" identity="true"/>
+        <column xsi:type="varchar" name="filename" length="1024" nullable="false"/>
+        <column xsi:type="varchar" name="area" length="255" nullable="true"/>
+        <column xsi:type="varchar" name="theme" length="255" nullable="true"/>
+        <column xsi:type="varchar" name="locale" length="255" nullable="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="filename_id"/>
+        </constraint>
+    </table>
+</schema>

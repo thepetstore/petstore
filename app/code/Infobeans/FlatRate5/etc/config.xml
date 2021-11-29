@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Configuration file to set default values of flat shipping module
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <ibflatrate1>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <price>0</price>
+                <model>Infobeans\FlatRate5\Model\Carrier\Flatrate1</model>
+                <name>Fixed</name>
+                <title>Flat Rate 1</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </ibflatrate1>
+            <ibflatrate2>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <price>0</price>
+                <model>Infobeans\FlatRate5\Model\Carrier\Flatrate2</model>
+                <name>Fixed</name>
+                <title>Flat Rate 2</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </ibflatrate2>
+            <ibflatrate3>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <price>0</price>
+                <model>Infobeans\FlatRate5\Model\Carrier\Flatrate3</model>
+                <name>Fixed</name>
+                <title>Flat Rate 3</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </ibflatrate3>
+            <ibflatrate4>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <price>0</price>
+                <model>Infobeans\FlatRate5\Model\Carrier\Flatrate4</model>
+                <name>Fixed</name>
+                <title>Flat Rate 4</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </ibflatrate4>
+            <ibflatrate5>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <price>0</price>
+                <model>Infobeans\FlatRate5\Model\Carrier\Flatrate5</model>
+                <name>Fixed</name>
+                <title>Flat Rate 5</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </ibflatrate5>
+        </carriers>
+    </default>
+</config>

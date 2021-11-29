@@ -1,0 +1,225 @@
+<div class="iwd_opc_column iwd_opc_address_column" data-bind="visible: !quoteIsVirtual">
+    <div class="iwd_opc_alternative_column">
+        <div class="iwd_opc_universal_wrapper iwd_opc_column_name" data-bind="i18n: 'Shipping Address'"></div>
+        <div tabindex="-1" class="iwd_opc_column_content">
+
+            <!-- ko if: (!quoteIsVirtual) -->
+            <!-- ko foreach: getRegion('customer-email') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <!--/ko-->
+
+            <!-- ko template: 'IWD_Opc/shipping-address/list' --><!-- /ko -->
+
+            <!-- ko foreach: getRegion('address-list-additional-addresses') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+
+            <!-- ko foreach: getRegion('before-form') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+
+            <div id="opc-new-shipping-address" data-bind="visible: isAddressFormVisible">
+                <!-- ko if: customerHasAddresses -->
+                <div class="iwd_opc_section_delimiter"></div>
+                <!--/ko-->
+                <!-- ko template: 'IWD_Opc/shipping-address/form' --><!-- /ko -->
+            </div>
+        </div>
+       
+        <!-- ko if: isShowComment -->
+            <div class="fieldset">
+                <div class="field">
+                    <div class="control">
+                                <textarea
+                                        rows="8"
+                                        data-bind="
+                                        value: commentValue,
+                                        afterRender: textareaAutoSize,
+                                        attr: {
+                                            title: $t('Additional Information'),
+                                            placeholder: $t('Additional Information'),
+                                            id: 'comment',
+                                            name: 'comment'
+                                        }"/>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="fieldset">
+                <div class="field choice">
+                  <input type="checkbox" class="checkbox" id="show_map_check" name="is_show_map" />
+                  <label><span>Show Map</span></label>
+                </div>
+            </div>
+
+            <div class="fieldset">
+                <div class="field">
+                    <div class="control">
+                        <div id="map" data-bind="style: {width: '422px',height: '350px',overflow: 'unset'}, attr: {id: 'map',name: 'map'},afterRender: function(target, viewModel) {  var infoWindow; var myLatLng = {lat: 25.087387, lng: 55.174713}; let map = new google.maps.Map(document.getElementById('map'), { center: new google.maps.LatLng(25.087387, 55.174713),zoom: 8 });  marker = new google.maps.Marker({ map:map, draggable:true, animation: google.maps.Animation.DROP, position: myLatLng,}); google.maps.event.addListener(marker, 'dragend', function(marker) { var latLng = marker.latLng; currentLatitude = latLng.lat();
+                        currentLongitude = latLng.lng(); geocodePosition(marker.latLng);  function geocodePosition(pos) {
+                        geocoder = new google.maps.Geocoder();
+                        geocoder.geocode ({ latLng: pos }, 
+                        function(results, status) 
+                        {
+                            if (status == google.maps.GeocoderStatus.OK) 
+                            {
+                                var addressComponents = results[0].address_components;
+                                var address_component = {}
+                                var address_components = results[0].address_components;
+                                var street, streetNumber, neighborhood, city, state,county, zip_code, zip, country= ''; 
+                                for (i = 0; i < address_components.length; i++) {
+                                    address_component = address_components[i];
+                                    types = address_component.types;
+                                    for (j = 0; j < types.length; j++) {
+                                      if (types[j] === 'street_number') {
+                                        streetNumber = address_component.long_name;
+                                      }
+                                      if (types[j] === 'route') {
+                                        street = address_component.long_name;
+                                      }
+                                      if (types[j] === 'neighborhood') {
+                                        neighborhood = address_component.long_name;
+                                      }
+                                      if (types[j] === 'locality') {
+                                        city = address_component.long_name;
+                                      }
+                                      if (types[j] === 'administrative_area_level_1') {
+                                        state = address_component.long_name;
+                                      }
+                                      if (types[j] === 'administrative_area_level_2') {
+                                        county = address_component.long_name;
+                                      }
+                                      if (types[j] === 'country') {
+                                        country = address_component.long_name;
+                                      }
+                                      if (types[j] === 'postal_code') {
+                                        zip_code = address_component.long_name;
+                                      }
+                                      if (types[j] === 'postal_code_suffix') {
+                                        zip = address_component.long_name;
+                                      }
+                                      break;
+                                    }
+                                  }
+                                  
+                                  // console.log(city);
+                                  var area = state;     
+                                  document.getElementsByName('street[0]')[0].value = street;
+                                  document.getElementsByName('street[0]')[0].onkeyup = function() { };
+                                  document.getElementsByName('custom_attributes[area]')[0].value = area;
+                                  document.getElementsByName('custom_attributes[area]')[0].onkeyup = function() {};
+
+                                  var sel = document.getElementById('city_selection_id');
+                                  var opts = sel.options;
+                                  for (var opt, j = 0; opt = opts[j]; j++) {
+                                    if (opt.value == city) {
+                                      sel.selectedIndex = j;
+                                      document.getElementById('city_selection_id').addEventListener('keyup', function(){ });
+                                      break;
+                                    } else { sel[j].selected = false; document.getElementById('city_selection_id').removeEventListener('keyup', function(){ }); }
+                                  }
+                                  } else { }
+                                }
+                            );
+                         }}); }"></div>   
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+
+
+<div class="iwd_opc_column iwd_opc_shipping_column" data-bind="visible: !quoteIsVirtual">
+    <div class="iwd_opc_alternative_column">
+        <div class="iwd_opc_universal_wrapper iwd_opc_column_name" data-bind="i18n: 'Shipping Method'"></div>
+        <div tabindex="-1" class="iwd_opc_column_content">
+            <div id="iwd_opc_shipping_method"
+                 data-bind="iwdBlockLoader:isRatesLoading">
+                <div class="fieldset">
+                    <form class="form methods-shipping" id="co-shipping-method-form">
+                        <!-- ko if: rates().length  -->
+                        <div id="checkout-shipping-method-load" class="iwd_opc_universal_wrapper">
+                            <div class="field">
+                                <div class="control">
+                                    <select class="select"
+                                            id="iwd_opc_shipping_method_group"
+                                            name="iwd_opc_shipping_method_group"
+                                            data-validate="{required:true}"
+                                            data-bind="
+                                        options: shippingRateGroups,
+                                        value: shippingRateGroup,
+                                        optionsAfterRender:
+                                            function(option, item) {
+                                                decorateSelect('iwd_opc_shipping_method_group');
+                                            },
+                                        optionsCaption: shippingRateGroupsCaption
+                                    "></select>
+                                </div>
+                            </div>
+                            <div class="field" data-bind="visible: isShippingRatesVisible">
+                                <div class="control">
+                                    <select class="select"
+                                            id="iwd_opc_shipping_method_rates"
+                                            name="iwd_opc_shipping_method_rates"
+                                            data-validate="{required:true}"
+                                            data-bind="
+                                        options: shippingRates,
+                                        optionsAfterRender:
+                                            function(option, item) {
+                                                decorateSelect('iwd_opc_shipping_method_rates');
+                                            },
+                                        value: shippingRate,
+                                        optionsText: shippingRateTitle,
+                                        optionsValue: function(item){
+                                            return item.carrier_code+'_'+item.method_code;
+                                        },
+                                        optionsCaption: shippingRatesCaption,
+                                        event: {change: function(){selectShippingMethod(shippingRate(), shippingRates())}}
+                                    "></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="onepage-checkout-shipping-method-additional-load" class="iwd_opc_universal_wrapper">
+                            <!-- ko foreach: getRegion('shippingAdditional') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: rates().length > 0 -->
+                        <div class="field">
+                            <div class="control">
+                                <input readonly="readonly"
+                                       type="text"
+                                       tabindex="-1"
+                                       data-validate="{required:true}"
+                                       class="input-text"
+                                       data-bind="attr: {placeholder: $t('Options Unavailable'), title: $t('Options Unavailable')}"/>
+                                <div class="iwd_opc_field_tooltip iwd_opc_shipping_method_tooltip" data-icon="&#xf059">
+                                    <div class="iwd_opc_field_tooltip_content">
+                                        <!-- ko i18n: 'Make sure all required shipping address fields are completed before choosing a shipping method.' -->
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </form>
+                    <!-- ko foreach: getRegion('before-shipping-method-form') -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- ko if: isShowDelimiterAfterShippingMethods -->
+            <div class="iwd_opc_section_delimiter"></div>
+            <!-- /ko -->
+            <!-- ko if: isShowGiftMessage -->
+            <!-- ko foreach: getRegion('gift-message') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

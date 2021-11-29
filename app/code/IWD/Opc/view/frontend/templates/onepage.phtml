@@ -1,0 +1,378 @@
+<?php
+/**
+ * @var $block IWD\Opc\Block\Onepage
+ */
+?>
+<?php //$isVirtual = $block->getQuote()->isVirtual() ?>
+<?php
+/**
+ * @var $checkoutSession \Magento\Checkout\Model\Session\Proxy
+ */
+$checkoutSession = \Magento\Framework\App\ObjectManager::getInstance()
+    ->get(\Magento\Checkout\Model\Session\Proxy::class);
+$isVirtual = $checkoutSession->getQuote()->isVirtual() ?>
+<div class="iwd_opc_clear"></div>
+<div id="checkout-loader" data-role="checkout-loader" class="loading-mask" data-mage-init='{"checkoutLoader": {}}'>
+    <div class="loader"></div>
+</div>
+<div id="iwd_opc_iframe_container" class="iwd_main_wrapper iwd_opc_wrapper " style="display: none;">
+    <div class="iwd_opc_alternative_wrapper">
+        <div class="iwd_opc_column iwd_opc_iframe_payment_column">
+            <div class="iwd_opc_alternative_column">
+                <div class="iwd_opc_universal_wrapper iwd_opc_column_name">
+                    <?php echo __('Choose a Different Payment Method'); ?>
+                </div>
+                <div class="iwd_opc_column_content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------------- For OTP ----------------->
+<!--
+<div id="myModel" style="display: none;">
+    <h1 class="modal-title">Mobile Number Verification</h1>
+    <p class="note-cod required">
+        <span id="otp_send_confirm"></span>
+        <span id="mobileNumber_otp"></span>
+    </p>
+    <p><b id="timer_run"></b></p>
+    <div role="alert" class="messages otp-success" style="display: none">
+      <div class="message-success success message" data-ui-id="message-success">
+        <div>
+         <span id="success-valid-code"></span>
+        </div>
+      </div>
+    </div>
+    <div role="alert" class="messages otp-error" style="display:none;">
+        <div class="message-error error message" data-ui-id="message-error">
+            <div>
+            <span id="empty-invalid-otp"></span>
+            </div>
+        </div>
+    </div> -->
+   <!--  <div class="title" data-role="title">
+        <strong id="block-discount-heading" role="heading" aria-level="2"><span>Verify OTP</span></strong>
+        </div>
+    <input class="input-text" type="number" name="verify_number" aria-required="true"  id="opt-number" placeholder="Enter OTP">
+        <input type="hidden" id="checkout_flag" value="0" class=""/>
+        <input type="hidden" id="counter_timer" value="120" class=""/>
+        <div class="opt-error-msg"></div>
+</div>
+-->
+<!--
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($,modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                modalClass: 'otp-modal',
+                buttons: [{
+                    text: $.mage.__('Verify OTP'),
+                    attr: { 
+                          id: 'opt_checkout'
+                    },
+                    class: 'action primary',
+                    click: function (event) {
+                        haveverify(event);
+                    }
+                }, {
+                    text: $.mage.__('Resend SMS'),
+                    attr: {
+                           id: 'opt_SMS' 
+                    },
+                    class: 'action primary',
+                    click: function (event) {
+                        haveresend(event);
+                    }
+                }]
+            };
+            // openeing modal
+            var popup = modal(options, $('#myModel'));
+            $("#openModel").on("click",function(){
+                $('#myModel').modal('openModal');
+            });
+            // openeing modal
+            // For checkout button to send sms
+            function haveverify(event) {
+                var numvalue = $("#opt-number").val();
+                $.ajax({
+                    headers: { "Accept": "application/json"},
+                    type: 'POST',
+                    url: '<?php echo $block->getBaseUrl();?>verify_code.php',
+                    crossDomain: true,
+                    data:{method:2,code:numvalue,refrence_number:refrence_number},
+                    beforeSend: function(xhr){
+                        xhr.withCredentials = true;
+                    },
+                    success: function(data, textStatus, request){
+                        if(parseInt(data) == 1){
+                        $("#checkout_flag").val("1");
+                        $("#success-valid-code").text("Verified mobile number successfully");
+                        $(".otp-error").hide();
+                        $(".otp-success").show();
+                        $("#timer_run").hide();
+                        $("#opt-number").attr("disabled", true);
+                        $("#opt_SMS").hide();
+                        $("#opt_checkout").hide();
+                        }else if(parseInt(data) == 2){
+                           $(".opt-error-msg").val( "Code not Exsist");
+                           $(".otp-success").hide();
+                           if($("#opt_checkout").hide()) {
+                               $("#opt_checkout").show();
+                            }
+                        }else if(parseInt(data) == 3){
+                            // $(".opt-error-msg").val( "Code Expire");
+                            $("#empty-invalid-otp").text( "Code Expire");
+                            $(".otp-error").show();
+                            $(".otp-success").hide();
+                            if($("#opt_checkout").hide()) {
+                               $("#opt_checkout").show();
+                            }
+                        }else if(parseInt(data) == 4){
+                            $("#empty-invalid-otp").text( "Invalid OTP");
+                            $(".otp-success").hide();
+                            $(".otp-error").show();
+                            if($("#opt_checkout").hide()) {
+                               $("#opt_checkout").show();
+                            }
+                            if($("#timer_run").hide()) {
+                                $("#timer_run").show();
+                            }
+                        }else if(parseInt(data) == 5){
+                            $("#empty-invalid-otp").text( "Invalid OTP");
+                            $(".otp-success").hide();
+                            $(".otp-error").show();
+                            if($("#opt_checkout").hide()) {
+                               $("#opt_checkout").show();
+                            }
+                            if($("#timer_run").hide()) {
+                                $("#timer_run").show();
+                            }
+                        }
+                    },error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        console.log(msg);
+                    }
+                });
+            }
+            // For checkout button to send sms
+            
+            /*______  For resend sms again _______ */
+            function haveresend(event) {
+                var eventg = 'Checkout';
+                $num= $("input[name=telephone]").val();
+                if($num.length >= 10 ){// $num has + with countrt code
+                    var s2 = $num.substr(1);
+                    text = 971+s2;
+                }else {// worong format
+                    $("#modal-title-0").text('Invalid Number');
+                    alert("Number not Valid");
+                    return false;
+                }
+                $.ajax({
+                    headers: { "Accept": "application/json"},
+                    type: 'GET',
+                    url: '<?php echo $block->getBaseUrl();?>sms.php?method=1&phone='+text+'&event='+eventg+'&is_expired=1',
+                    crossDomain: true,
+                    beforeSend: function(xhr){
+                        xhr.withCredentials = true;
+                    },
+                    success: function(data, textStatus, request){
+                        // $(".modal-title").text("Resend OPT have sent to You");
+                        $("#otp_send_confirm").text("An OTP (One Time Passcode) has been sent to");
+                        $("#mobileNumber_otp").text($num + '. ' + 'Please enter the OTP in the field below to verify.');
+                        $("#success-valid-code").text("OTP send successfully");
+                        $(".otp-error").hide();
+                        $(".otp-success").show();
+                        refrence_number = data;
+                        // var timeLeft = 120;
+                        var elem = document.getElementById('modal-title-0');
+                        var timer_elem = document.getElementById('timer_run');
+                        $("#opt_SMS").attr("disabled", true);
+                        var timerId;
+                        timerId = setInterval(countdown, 1000);
+                        document.getElementById('counter_timer').value = 120;
+                        var timeLeft = document.getElementById('counter_timer').value;
+                        
+                        function countdown() {
+                            if (timeLeft == 0) {
+                                clearTimeout(timerId);
+                                timer_elem.innerHTML = 'Your OTP Code is Expire';
+                                document.getElementById('counter_timer').value = timeLeft;
+                                 $("#opt_SMS").removeAttr("disabled");
+                                // $("#opt_SMS").attr("disabled", true);
+                            } else {
+                                timer_elem.innerHTML = timeLeft + ' seconds remaining';
+                                timeLeft--;
+                                document.getElementById('counter_timer').value = timeLeft;
+                            }
+                        }
+                        
+                        console.log(data);
+                    },error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        console.log(msg);
+                    }
+                });
+                return false;
+            }
+            /*______  For resend sms again _______ */
+        }
+    );
+</script>
+-->
+<!--------------- For OTP ----------------->
+<div id="checkout" data-bind="scope:'checkout'"
+     class="iwd_opc_wrapper iwd_main_wrapper">
+    <div class="iwd_opc_alternative_wrapper">
+        <?php if ($isVirtual) { ?>
+        <div class="iwd_opc_two_column_wrapper">
+            <?php } ?>
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <?php if ($isVirtual) { ?>
+        </div>
+    <?php } ?>
+        <script type="text/x-magento-init">
+        {
+            "#checkout": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */
+                echo $block->getJsLayout(); ?>
+            }
+        }
+        </script>
+        <script>
+            window.checkoutConfig = <?php /* @escapeNotVerified */
+            echo \Zend_Json::encode($block->getCheckoutConfig()); ?>;
+            // Create aliases for customer.js model from customer module
+            window.isCustomerLoggedIn = window.checkoutConfig.isCustomerLoggedIn;
+            window.customerData = window.checkoutConfig.customerData;
+        </script>
+        <?php if (!$isVirtual) { ?>
+            <?php echo $block->getChildHtml('checkout.gift_options', false) ?>
+        <?php } ?>
+        <script>
+            require([
+                'mage/url',
+                'IWD_Opc/js/block-loader'
+            ], function (url, iwdBlockLoader) {
+                iwdBlockLoader();
+                return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+            });
+		
+              
+        </script>
+	
+    </div>
+		
+		<?php  
+		$objectManager =  \Magento\Framework\App\ObjectManager::getInstance(); 
+          $moduleManager = $objectManager->get('\Magento\Framework\Module\Manager');
+		
+		if($moduleManager->isEnabled('Amazon_Login')){ ?>
+		 <div class="amazon-button-container" id="minicart-amazon-pay-button" style="display:none;">
+                   <div class="amazon-button-container centered-button" style="margin-left:45%;">
+    <div class="amazon-button-container__cell">
+        <div id="PayWithAmazon-<?php echo $block->getJsId() ?>" class="login-with-amazon" data-mage-init='{"amazonButton": {"buttonType": "PwA"}}'></div>
+    </div>
+
+    <div class="amazon-button-container__cell">
+        <div class="field-tooltip toggle">
+            <span class="field-tooltip-action action-help" data-bind="mageInit: {'dropdown':{'activeClass': '_active'}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+            <div class="field-tooltip-content" data-target="dropdown" aria-hidden="true"><?php /* @noEscape */  echo __('Are you an Amazon customer? Pay now with address and payment details stored in your Amazon account.'); ?></div>
+        </div>
+    </div>
+</div>
+
+                </div>
+		<?php  } ?>
+
+	
+	
+
+</div>
+<script>
+require([
+    "jquery",
+    "jquery/ui"
+], function($){
+    
+    $.extend(true, $, {
+        calendarConfig: {
+            dayNames: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+            dayNamesMin: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+            monthNames: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+            monthNamesShort: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+            infoTitle: "About the calendar",
+            firstDay: 0,
+            closeText: "Close",
+            currentText: "Go Today",
+            prevText: "Previous",
+            nextText: "Next",
+            weekHeader: "WK",
+            timeText: "Time",
+            hourText: "Hour",
+            minuteText: "Minute",
+            dateFormat: $.datepicker.RFC_2822,
+            showOn: "button",
+            showAnim: "",
+            changeMonth: true,
+            changeYear: true,
+            buttonImageOnly: null,
+            buttonImage: null,
+            showButtonPanel: true,
+            showOtherMonths: true,
+            showWeek: false,
+            timeFormat: '',
+            showTime: false,
+            showHour: false,
+            showMinute: false,
+            serverTimezoneSeconds: 1521082614,
+            serverTimezoneOffset: 0,
+            yearRange: '1918:2118'
+        }
+    });
+
+enUS = {"m":{"wide":["January","February","March","April","May","June","July","August","September","October","November","December"],"abbr":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}}; // en_US locale reference
+
+});
+
+</script>
+<div class="iwd_opc_clear"></div>

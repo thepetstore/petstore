@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2column-catmain" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+          <referenceBlock name="header.content">
+            <block class="Magento\Framework\View\Element\Template" name="select-filter" as="select-filter"
+                       template="Magento_Theme::category/select-category.phtml"/>
+          </referenceBlock>
+
+        <!--   <referenceBlock name="breadcrumbs" remove="true" /> -->
+          <referenceContainer name="columns">
+                <container name="container" label="" htmlTag="div" htmlClass="sec-2 pro-all" />
+            </referenceContainer>        
+           <move element="div.container" destination="container" before="-"/>
+
+          <referenceContainer name="div.col-main" htmlTag="div" htmlClass="col-md-9 col-sm-9 prod-bar-right" />
+          <referenceContainer name="div.sidebar" htmlTag="div" htmlClass="col-md-3 col-sm-3 side-bar-pro" />
+          <move element="div.col-main" destination="div.row" after="div.sidebar" />
+
+          <referenceContainer name="div.sidebar.main" remove="true" />
+          <referenceContainer name="div.sidebar.additional">
+		     <block class="Magento\Cms\Block\Block" name="all.category.left.section">
+		        <arguments>
+		            <argument name="block_id" xsi:type="string">all-category-left-section</argument>
+		        </arguments>
+		    </block>
+
+			<referenceBlock name="catalog.compare.sidebar" remove="true"/> <!-- Remove sidebar -->
+			<referenceBlock name="catalog.compare.link" remove="true"/> <!-- Remove link in header -->
+			<referenceBlock name="related.product.addto.compare" remove="true"/> <!-- Related product -->
+			<referenceBlock name="category.product.addto.compare" remove="true"/> <!-- Category add compare -->
+			<referenceBlock name="view.addto.compare" remove="true" /> <!-- Product addto compare -->
+			<referenceBlock name="filterproducts" remove="true" />
+			<referenceBlock name="brandsidebar" remove="true" />
+			<referenceBlock name="brand_sidebar" remove="true" />
+       <referenceBlock name="catalog.leftnav" remove="true" />
+      <referenceBlock name="catalog.navigation.renderer" remove="true" />
+      <referenceBlock name="catalog.navigation.state" remove="true" />
+         </referenceContainer>
+
+          <referenceContainer name="content">
+          	  <block class="Magento\Framework\View\Element\Template" name="category_listing" template="Magento_Theme::category/listing.phtml" before="category.products" />
+              
+              <referenceBlock name="category_top_slider" remove="true" />
+              <referenceBlock name="product_list_toolbar_pager" remove="true" />
+              <referenceBlock name="category.products" remove="true" />
+          </referenceContainer>
+
+    </body>
+</page>
