@@ -1,0 +1,84 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    // $categories = $objectManager->create('Magento\Catalog\Model\ResourceModel\Category\Collection');
+    // $categories->addAttributeToSelect('*')
+    // ->addAttributeToFilter('sm_show_in_cat_landing',['eq'=>1])
+    // ->addAttributeToFilter('is_active',['eq'=>1])
+    // ->setOrder('sm_show_in_cat_landing_order', 'ASC'); 
+     $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+       //get current category
+    
+      $category_main = $objectManager->create('Magento\Catalog\Model\Category')->load($category->getId());
+    $categories = $category_main->getChildrenCategories();
+    // $categories->setOrder('sm_show_in_cat_landing_order', 'ASC');
+    ?>
+    
+    <div id="accordion">
+    <?php
+    $tsk = 0;
+    foreach($categories as $category):
+    $_catId = $category->getEntityId();
+    $catname = $category->getName();
+    $caturl = $category->getUrl();
+
+    $category = $objectManager->create('Magento\Catalog\Model\Category')
+    ->load($_catId );
+    /*____________ NEwly Code ________ */
+    if($category_main->getId() == 273 && ($tsk == 2 || $tsk == 3 || $tsk == 4 || $tsk == 5)) { $subct = $category->getChildrenCategories(); 
+      foreach ($subct as $one) {
+         $catname = $one->getName();
+         $caturl = $one->getUrl();
+         $subcategories = $one->getChildrenCategories();
+      }
+    } 
+    else { 
+       $subcategories = $category->getChildrenCategories();
+    }  
+    /*____________ NEwly Code ________ */
+    // $subcategories = $category->getChildrenCategories();
+
+
+     $_outputhelper    = $this->helper('Magento\Catalog\Helper\Output');
+        if(count($subcategories)):
+?>
+            <a href="javascript:;" class="list-group-item list-group-item"><?php echo $catname; ?></a>
+            <div>
+              <ul>
+                <?php foreach($subcategories as $subcategory):?>
+                    <li><a href="<?php echo $subcategory->getUrl(); ?>"><?php echo $subcategory->getName(); ?></a></li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+<?php
+    else:
+  ?>
+   <a href="javascript:;" class="list-group-item list-group-item"><?php echo $catname; ?></a>
+     <div>
+       <!--  <ul>
+              <li><a href="<?php // echo $category->getUrl(); ?>"><?php // echo $category->getName(); ?></a></li>
+        </ul> -->
+      </div>  
+
+  <?php endif;
+  $tsk++;
+    endforeach; ?>
+    
+</div> 
+<script type="text/javascript">
+require([
+    'jquery',
+    'jquery/ui',
+    'domReady!'
+], function () {
+    jQuery( function() {
+        // jQuery( "#accordion" ).accordion({
+        //    // active: false,
+        //     collapsible: true,
+        //   //  navigation: true,
+        //     autoHeight: true,
+        //     heightStyle: "content"
+        // });
+    });
+});
+</script>
+

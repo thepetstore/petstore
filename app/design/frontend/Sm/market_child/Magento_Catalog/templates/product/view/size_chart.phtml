@@ -1,0 +1,13 @@
+<?php
+$product = $block->getProduct();
+?>
+<?php $productImageAttr = $product->getData('size_chart'); 
+if($productImageAttr){
+$productImage = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($product, 'size_chart')
+    ->setImageFile($product->getData('size_chart'));
+?>
+<?php if($product->getData('size_chart') == 'no_selection') {  } else { ?>
+<img src="<?php echo $productImage->getUrl() ?>" alt="<?php echo $block->escapeHtml($product->getTitle()) ?>" />
+<?php } ?>
+<?php } ?>

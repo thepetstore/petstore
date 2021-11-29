@@ -1,0 +1,13 @@
+<?php
+$product = $block->getProduct();
+?>
+<?php $productImageAttr = $product->getData('feeding_guide'); 
+if($productImageAttr){
+$productImage = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($product, 'feeding_guide')
+    ->setImageFile($product->getData('feeding_guide'));
+?>
+<?php if($product->getData('feeding_guide') == 'no_selection') {  } else { ?>
+<img src="<?php echo $productImage->getUrl() ?>" alt="<?php echo $block->escapeHtml($product->getTitle()) ?>" />
+<?php } ?>
+<?php } ?>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="emizen_brand_view"/>
+
+        <referenceContainer name="sidebar.main">
+             <block class="Emizentech\ShopByBrand\Block\Navigation" name="catalog.leftnav" as="navigation" before="-" template="Magento_LayeredNavigation::layer/view.phtml">
+                <block class="Emizentech\ShopByBrand\Block\Navigation\State" name="catalog.navigation.state" as="state" template="Magento_LayeredNavigation::layer/state.phtml" />
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer" template="Magento_LayeredNavigation::layer/filter.phtml"/>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block class="Emizentech\ShopByBrand\Block\View" name="brand.view"  template="Emizentech_ShopByBrand::emizen_brand/view.phtml" cacheable="false">
+
+            	 <block class="Emizentech\ShopByBrand\Block\Product\ListProduct" name="category.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                     <container name="category.product.list.additional" as="additional" />
+
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                    	<block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magento_Swatches::product/listing/renderer.phtml" />
+
+                        <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    </block>
+
+                    <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                        <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName">
+                        <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                    </action>
+                </block>
+             </block>
+             
+            <referenceContainer name="product.info.options.configurable" remove="true"/>
+	        <referenceBlock name="product.info.options.wrapper">
+	            <block class="Magento\Swatches\Block\Product\Renderer\Configurable" name="product.info.options.swatches" as="swatch_options" before="-" />
+	        </referenceBlock>
+
+           <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
+         	</block>
+
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="page.main.title" destination="product.info.main" before="-"/>
+
+        <referenceBlock name="catalog.product.related" remove="true"/>
+        <referenceBlock name="product.info.upsell" remove="true"/>
+
+        <referenceContainer name="sidebar.additional">
+            <block class="Magento\Cms\Block\Block" name="service-sidebar" before="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">service-sidebar</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Cms\Block\Block" name="product-detail" before="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">detail-product-sidebar</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Framework\View\Element\Template" name="social.button.detail"
+                   after="product.info.overview" template="Magento_Theme::html/social-button.phtml"
+                   ifconfig="market/product_detail/show_social_button"/>
+        </referenceContainer>
+
+        
+    </body>
+</page>

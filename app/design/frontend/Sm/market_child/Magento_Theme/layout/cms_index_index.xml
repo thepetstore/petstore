@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * cms_index_index.xml
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * 
+ * This file only is displayed on the homepage of magento
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		  <referenceContainer name="columns">
+                <container name="container" label="" htmlTag="div" htmlClass="slider-home" />
+            </referenceContainer>        
+           <move element="div.container" destination="container" before="-"/>
+    </body>
+ </page>

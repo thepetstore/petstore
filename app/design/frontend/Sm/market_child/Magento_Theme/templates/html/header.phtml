@@ -1,0 +1,143 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header $block
+ */
+
+$_config     = $this->helper('Sm\Market\Helper\Data');
+$headerStyle = $_config->getThemeLayout('header_style');
+
+include($block->getTemplateFile("Magento_Theme::html/header-style/" . $headerStyle . ".phtml"));
+?>
+
+<?php
+if ($_config->getAdvanced('show_newsletter_popup')) {
+    echo $block->getChildHtml('form.subscribe.popup');
+}
+?>
+
+<?php if ($_config->getGeneral('menu_ontop') == 1) { ?>
+    <script type="text/javascript" defer="defer">
+        require([
+            'jquery'
+        ], function ($) {
+            $window = $(window);
+            if ($('.header-bottom').length) {
+                menu_offset_top = $('.header-bottom').offset().top;
+
+                function processScroll() {
+                    var scrollTop = $window.scrollTop();
+                    if (scrollTop >= menu_offset_top) {
+                        $('.header-bottom').addClass('menu-on-top');
+                        $('body').addClass('body-on-top');
+                    } else if (scrollTop <= menu_offset_top) {
+                        $('.header-bottom').removeClass('menu-on-top');
+                        $('body').removeClass('body-on-top');
+                    }
+                }
+
+                processScroll();
+                $window.scroll(function () {
+                    processScroll();
+                });
+            }
+        });
+    </script>
+<?php } ?>
+
+ <script type="text/javascript">
+      require(["jquery"],function($){
+      $('body').on("click",".increasing-qty, .decreasing-qty",function(){
+            var obj = $(this);
+            var currentQty = obj.siblings('.cart-item-qty').val();
+           
+            var iid = obj.siblings('.update-cart-item').attr('data-cart-item');
+
+            if(obj.hasClass('increasing-qty')){
+                var newAdd = parseInt(currentQty)+parseInt(1);
+                obj.siblings('.cart-item-qty').val(newAdd);
+                obj.siblings('.cart-item-qty').attr('data-item-qty',newAdd);
+                //$('#update-cart-item-'+iid).click();
+                $('#update-cart-item-'+iid).show();
+                // obj.parent().closest("button.update-cart-item").show();
+            }else{
+              if(parseInt(currentQty) > 1)
+           {
+           var newAdd = parseInt(currentQty)-parseInt(1);
+            obj.siblings('.cart-item-qty').val(newAdd); 
+            obj.siblings('.cart-item-qty').attr('data-item-qty',newAdd);
+            //$('#update-cart-item-'+iid).click();
+            $('#update-cart-item-'+iid).show();
+            // $('.update-cart-item').show();
+            }
+           }
+        }); // end of increase decrase qty
+
+            $(document).on("keypress keyup blur", '.login-register-pop-number',function (event) {
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+            }
+            });
+
+            $(document).on("keypress keyup blur", '.login-register-pop-number', function (event) {
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+            }
+            });
+
+            $(document ).ajaxComplete(function() {
+               jQuery('div.toolbar-top').each(function(index, item){
+                   var text = jQuery(item).text().replace(/\s*/g, '');
+                  // console.log(text.trim().length);
+                   if(text.trim().length == 0 || text.trim().length == 55 || text.trim().length == 54)
+                       jQuery(item).remove();
+               });
+             jQuery('div.toolbar-bottom').each(function(index, item){
+                   var text = jQuery(item).text().replace(/\s*/g, '');
+                  // console.log(text.trim().length);
+                   if(text.trim().length == 0 || text.trim().length == 55 || text.trim().length == 54)
+                       jQuery(item).remove();
+               });
+            });
+            
+          /* For product list animation */
+            $(function(){$(document).on('click','li.product-item > div.product-item-info > div.product-item-details > div.product-item-inner > div.product-item-actions > div.actions-primary > form > button.add-to-cart-btn',function(event){
+                event.preventDefault();
+                var obj=$(this);
+                var t=$(this).parents().eq(5).children('a.product.photo').children().children('span.product-image-wrapper').find('img').offset().top;
+                var l=$(this).parents().eq(5).children('a.product.photo').children().children('span.product-image-wrapper').find('img').offset().left;
+                $(this).parents().eq(5).children('a.product.photo').children().children('span.product-image-wrapper').append('<img src="'+($(this).parents().eq(5).children('a.product.photo').children().children('span.product-image-wrapper').find('img').attr('src'))+'" class="product-image-photo product-dynamic">');
+                  setTimeout(function(){obj.parents().eq(5).children('a.product.photo').children().children('span.product-image-wrapper').find('img.product-dynamic').addClass('clicked');},600);
+                $(this).closest("form").submit();
+              });
+             });
+            /* For product list animation */
+
+            /* Home page animation */
+            $(function(){$(document).on('click','div.product-item > div.product-item-info > div.product-item-details > form > button.add-to-cart-btn',function(event){
+                event.preventDefault();
+                var obj=$(this);
+                var t=$(this).parents().eq(2).children('a.product.photo').children().children('span.product-image-wrapper').find('img').offset().top;
+                var l=$(this).parents().eq(2).children('a.product.photo').children().children('span.product-image-wrapper').find('img').offset().left;
+                $(this).parents().eq(2).children('a.product.photo').children().children('span.product-image-wrapper').append('<img src="'+($(this).parents().eq(2).children('a.product.photo').children().children('span.product-image-wrapper').find('img').attr('src'))+'" class="product-image-photo product-dynamic">');
+                  setTimeout(function(){obj.parents().eq(2).children('a.product.photo').children().children('span.product-image-wrapper').find('img.product-dynamic').addClass('clicked');},600);
+                $(this).closest("form").submit();
+              });
+            });
+          /* For Home page animation */
+          });
+
+</script>
+
+<script type="text/javascript">
+  $.noConflict(); //Use no conflict here instead of js file
+  // Code that uses other library's $ can follow here.
+</script>

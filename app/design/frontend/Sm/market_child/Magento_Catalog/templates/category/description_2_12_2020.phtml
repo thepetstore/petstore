@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php if($_catdescription = $block->getCurrentCategory()->getData('is_small_banner') == 1): ?>
+
+<?php else: ?>
+<?php if($_description = $block->getCurrentCategory()->getDescription()): ?>
+<?php $_name = $block->getCurrentCategory()->getName() ?>
+ <!--    <div class="category-description"> -->
+      <div class="inner-img">
+        <?php echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?>
+        <div class="inner-img-cap">
+			<div class="container">
+				<h2><?php echo "The " . $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_name, 'name') . " Shop"; ?></h2>
+			</div>
+		</div>
+	  </div>
+    <!-- </div> -->
+  <?php else: ?>
+  <div class="inner-img">
+  	<?php $media = str_replace("/index.php", "", $block->getBaseUrl()); ?>
+	<img src="<?php echo $media . 'pub/media/wysiwyg/all-pro-banner.jpg'; ?>" alt="" width="100%" />
+		<div class="inner-img-cap">
+			<div class="container">
+				<h2>The Dog Shop</h2>
+			</div>
+		</div>
+	</div>
+ <?php endif; ?>
+ <?php endif; ?>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <images module="Magento_Catalog">
+            <image id="product_page_image_large" type="image">
+                <width>1000</width>
+                <height>1000</height>
+                <!--<aspect_ration>false</aspect_ration>-->
+                <frame>false</frame>
+                <!--<transparency>false</transparency>-->
+            </image>
+            <image id="product_page_image_medium" type="image">
+                <width>1000</width>
+                <height>1000</height>
+                <!--<aspect_ration>false</aspect_ration>-->
+                <frame>false</frame>
+            </image>
+        </images>
+    </media>
+</view>

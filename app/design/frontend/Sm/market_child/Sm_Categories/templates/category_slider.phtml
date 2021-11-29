@@ -1,0 +1,93 @@
+<?php
+/*------------------------------------------------------------------------
+# SM Categories - Version 3.2.0
+# Copyright (c) 2016 YouTech Company. All Rights Reserved.
+# @license - Copyrighted Commercial Software
+# Author: YouTech Company
+# Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+
+$list = $this->_getList();
+
+if (!empty($list)) {
+    $_config           = $this->helper('Sm\Market\Helper\Data');
+    $enableLadyLoading = $_config->getAdvanced('enable_ladyloading');
+    $mediaSrc          = $_config->getMediaUrl();
+
+    if ($enableLadyLoading) {
+        $imgClass = 'lazyload';
+    } else {
+        $imgClass = '';
+    }
+    ?>
+    <?php if (!empty($this->_getConfig('title_module'))) { ?>
+    <?php } ?>
+        <ul class="cat-mob-category owl-carousel owl-theme">
+            <?php foreach ($list as $item) { ?>
+
+                    <li class="cat-li">
+                        <div class="cat-image">
+                        <a href="<?php echo $item['url'] ?>" title="<?php echo $item['name'] ?>"> 
+                                <?php if ($item['cat_image']) { ?>
+                                        <img class="cat-img <?php echo $imgClass; ?>"
+                                            <?php if ($enableLadyLoading) { ?>
+                                                src="<?php echo $mediaSrc . 'lazyloading/blank.png'; ?>"
+                                                data-src="<?php echo $item['cat_image']; ?>"
+                                            <?php } else { ?>
+                                                src="<?php echo $item['cat_image']; ?>"
+                                            <?php } ?>
+                                        alt="<?php echo $item['name'] ?>"
+                                        />
+                            <?php  } else { ?>
+                                        <img class="cat-img <?php echo $imgClass; ?>"
+                                            <?php if ($enableLadyLoading) { ?>
+                                                src="<?php echo $mediaSrc . 'lazyloading/blank.png'; ?>"
+                                                data-src="<?php echo $mediaSrc . 'custom/default-img.jpg'; ?>"
+                                            <?php } else { ?>
+                                                src="<?php echo $mediaSrc . 'custom/default-img.jpg'; ?>"
+                                            <?php } ?>
+                                        alt="<?php echo $item['name'] ?>"
+                                        />
+                            <?php } ?>
+                        <h4> <?php echo $item['name']; ?></h4>
+                        </a>
+                        </div>
+                    </li>
+            <?php } ?>
+        </ul>
+    <?php
+} else { ?>
+    <div class="message info empty">
+        <div><?php /* @escapeNotVerified */
+            echo __('We can\'t find categories matching the selection.') ?></div>
+    </div>
+    <?php
+} ?>
+<script type="text/javascript">
+   require(["jquery", "owlcarousel"],function($){
+    //  $(".cat-mob-category").owlCarousel({
+    //     items: 2,
+    //     responsive: {0: {items: 2},  480: { items: 2 }, 768: { items: 3 }, 992: { items: 4}, loop: true, 600: {items: 3}, 960: {items: 4}, 1200: {items: 5}},
+    //     autoplay: false,
+    //     loop: true,
+    //     slideSpeed: 1000,
+    //     margin: 15,
+    //     navigation: true,
+    //     dots: false,
+    //     autoplayHoverPause: true,
+    //     margin: 30,
+    //     pagination: false,
+    // });
+
+        $(".cat-mob-category").owlCarousel({
+            autoplay: false,
+            loop: false,
+            nav: true,
+            dots: false,
+			arrows: true,
+            autoplayHoverPause: false,
+            margin: 5,
+            items: 3
+        });
+});
+</script>

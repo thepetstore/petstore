@@ -1,0 +1,174 @@
+<?php
+$_config = $this->helper('Sm\Market\Helper\Data');
+$mediaUrl = $_config->getMediaUrl();
+$logoMobile = $_config->getGeneral('logo_mobile');
+$storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();
+?>
+
+<?php $welcomeMessage = $block->getWelcome(); ?>
+<div class="header-container header-style-3">
+   <div class="header-top">
+        <div class="container">
+            <div class="col-md-2 col-sm-2 col-xs-12 logo-main">
+                 <?php echo $block->getChildHtml('logo_theme'); ?>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-12 header-right">
+                <div class="inner-right-parent">
+                    <div class="form-header">
+                         <?php echo $block->getChildHtml('search-header-pro'); ?>
+                    </div>
+                	<div class="need-help-has">
+						<h3>Need Help?</h3>
+						<div class="hove-box-need-help">
+							<div class="box-top">
+								<h3>Get help from our experts</h3>
+								<a href="tel:80073878673" style="font-size: 20px;">800-PETSTORE (73878673)</a>
+							</div>
+							<div class="box-bottom">
+								<ul> 
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+											 width="24" height="24"
+											 viewBox="0 0 172 172"
+											 style=" fill:#000000;">
+											<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+												<path d="M0,172v-172h172v172z" fill="none"></path>
+												<g fill="#02a6b2">
+													<path d="M14.33333,21.5v100.33333l21.5,-21.5h78.83333v-78.83333zM129,57.33333v57.33333h-71.66667v21.5h78.83333l21.5,21.5v-100.33333z"></path>
+												</g>
+											</g>
+										</svg> <span><a onclick="setButtonURL();" target="_self" href="javascript:;">Live Chat</a></span></li>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+											 width="20" height="20"
+											 viewBox="0 0 172 172"
+											 style=" fill:#000000;">
+											<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+												<path d="M0,172v-172h172v172z" fill="none"></path>
+												<g fill="#02a6b2">
+													<path d="M0,21.5v24.41146l86,43l86,-43v-24.41146zM0,59.57292v90.92708h172v-90.92708l-86,43z"></path>
+												</g>
+											</g>
+										</svg>
+										<span><a href="tel:+971502829999">Contact Us</a></span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+                 <?php
+                    $login_customer = $block->getLayout()->createBlock('Magento\Customer\Block\Account\Customer');
+                  ?>
+
+                <div class="account-login"> 
+                    <div class="accout-ico">
+                            <img src="<?php echo $block->getViewFileUrl('images/account-ico.png'); ?>" alt="Icon Account">
+                        </div>
+                        <div class="accout-details">
+                           <!--  <h3>Account</h3> -->
+                         <?php if ($login_customer->customerLoggedIn()) { ?>
+                            <a href="<?php echo $this->getUrl('customer/account') ?>"
+                               title="<?php echo __('Dashboard') ?>"> <h4> <?php echo __('Account') ?> </h4> </a>
+                        <?php } else { ?>
+                          <a href="<?php echo "javascript:;"; // echo $this->getUrl('customer/account/login') ?>"
+                               title="<?php echo __('Sign In') ?>"><h4> <?php echo __('Account') ?> </h4> </a>
+                        <?php } ?>
+                        </div>
+                </div>
+
+                    <div class="pro-cart">
+                        <?php // echo $block->getChildHtml('cart-header'); ?> 
+                         <div class="accout-ico">
+                            <img src="<?php echo $block->getViewFileUrl('images/shopping-cart-302.png'); ?>" alt="Icon Account">
+                        </div>
+                          <div class="pro-cart-details">
+                          <?php echo $block->getChildHtml('cart-header'); ?>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 main-megamenu-search">
+                    <div class="content-header-bottom">
+                        <div class="main-megamenu">
+                            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('main-menu')->toHtml(); ?>
+                        </div>
+
+                        <div class="navigation-mobile-container">
+                            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('main-menu')->toHtml(); ?>
+                             <?php  // echo $block->getChildHtml('navigation.mobile'); ?>
+                        </div>
+
+                        <div class="searchbox-header">
+                            FREE DELIVERY OVER AED100! 
+                            <?php //echo $block->getChildHtml('search-header-pro'); ?>
+				<img src="<?php echo $this->getViewFileUrl('images/toptruck1.png'); ?>" />
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<!-- Mobile Header -->
+<div class="page-header" id="mobile_header" style="display: none">
+	<div class="new-header-mobile">
+		<div class="mobile-top-new-menu">
+			<div class="top-menu-new">
+				<div class="left-menu-new">
+					<a href="javascript:;" class="sfw-header-menu-icon sfw-header-mobile__tab">
+						<span class="sfw-header-menu-icon__line"></span>
+					</a>
+					<a href="javascript:;" class="sfw-header-menu-search sfw-header-mobile__tab is-selected">
+						<span class="sfw-header-menu-icon__search"></span>
+					</a>
+				</div>
+				<div class="logo-center-new">
+                    <?php echo $block->getChildHtml('logo_theme'); ?>
+				</div>
+				<div class="right-menu-new">
+					<a href="<?php echo $this->getUrl('customer/account') ?>" class="sfw-header-menu-account sfw-header-mobile__tab">
+						<span class="sfw-header-menu-icon__account"></span>
+					</a>
+					<div class="pro-cart-details">
+						<a class="" href="https://www.thepetstore.ae/checkout/cart/">
+							<span class="sfw-header-menu-icon__cart"></span>
+						</a>
+                        <?php echo $block->getChildHtml('cart-header-mobile'); ?>
+					</div>
+				</div>
+			</div>
+			<div class="bottom-menu-new">
+				<div class="form-header">
+					<?php // echo $block->getChildHtml('search-header-pro'); ?>
+					<?php echo $block->getChildHtml('SearchMobile'); ?>
+				</div>
+			</div>
+			<div class="main-menu-new" style="display: none;">
+				<ul>
+					<li><a href="<?php echo $this->getUrl('shop-by-pet/dog.html') ?>">Dog </a></li>
+					<li><a href="<?php echo $this->getUrl('shop-by-pet/cat.html') ?>">Cat </a></li>
+					<li><a href="<?php echo $this->getUrl('shop-by-pet/bird/bird.html') ?>">Bird </a></li>
+					<li><a href="<?php echo $this->getUrl('shop-by-pet/small-pet/small-pet.html') ?>">Small Pet </a></li>
+					<li><a href="<?php echo $this->getUrl('shop-by-pet/fish/fish.html') ?>">Fish </a></li>
+					<li><a href="<?php echo $this->getUrl('shop-by-pet/reptiles/reptiles.html') ?>">Reptile </a></li>
+					<li><a href="<?php echo $this->getUrl('brands') ?>">Shop by Brand </a></li>
+					<li><a href="<?php echo $this->getUrl('new-arrivals/allproducts/new-products.html') ?>">New Arrivals </a></li>
+					<li><a href="<?php echo $this->getUrl('offers/sale-offers/deals.html') ?>">Offers </a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+     <?php echo $this->getChildHtml("select-filter"); ?>
+</div>
+<!-- Mobile Header -->
+
+<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('top-sv-header')->toHtml(); ?>
+
+           

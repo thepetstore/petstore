@@ -1,0 +1,52 @@
+<?php
+/**
+ *
+ * SM Listing Tabs - Version 2.5.0
+ * Copyright (c) 2017 YouTech Company. All Rights Reserved.
+ * @license - Copyrighted Commercial Software
+ * Author: YouTech Company
+ * Websites: http://www.magentech.com
+ */
+
+$list     = $this->_getList();
+$tag_id   = $this->_tagId();
+$cmsBlock = $this->_getConfig('cmsblock');
+if (!empty($list)) {
+    ?>
+        <div class="ltabs-loading-css">
+            <div class="loading-content">
+
+            </div>
+        </div>
+
+            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($cmsBlock)->toHtml(); ?>
+            <!--Begin Items-->
+           <div class="home-block slider-car pro-box p-p">
+                <?php foreach ($list as $items) {
+                    $products = isset($items['products_list']) ? $items['products_list'] : '';
+                    $cls      = (isset($items['sel'])) ? ' ltabs-items-selected ltabs-items-loaded ' : '';
+                    ?>
+                      <?php if (!empty($products)) {
+                                echo $this->getLayout()->createBlock("Sm\ListingTabs\Block\ListingTabs")->setData(['products' => $products, 'config' => $this->_getConfig()])->setTemplate("Sm_ListingTabs::default_items.phtml")->toHtml();
+                            } else {
+                                ?>
+                               <!--  <div class="ltabs-loading">
+                                    <div class="loading-content">
+
+                                    </div>
+                                </div> -->
+                            <?php } ?>
+                <?php } ?>
+            </div>
+            <!--End Items-->
+    <?php
+} else { ?>
+    <div class="message info empty">
+        <div><?php /* @escapeNotVerified */
+            echo __('We can\'t find products matching the selection.') ?></div>
+    </div>
+    <?php
+} ?>
+
+
+

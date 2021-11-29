@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php if($_catdescription = $block->getCurrentCategory()->getData('is_small_banner') == 1): ?>
+    <div class="catalog-desktop-banner">
+<?php if($_description = $block->getCurrentCategory()->getDescription()): ?>
+<?php echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?>
+<?php endif; ?>
+    </div>
+<?php endif; ?>

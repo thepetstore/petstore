@@ -1,0 +1,98 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+<?php if ($block->canShowBlock()): ?>
+    <div class="block filter" id="layered-filter-block">
+        <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+        <div class="block-title filter-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
+            <strong data-role="title"><?php /* @escapeNotVerified */ echo __('Filter By') ?></strong>
+            <div class="filter_close">
+              <i class="fa fa-close"></i>
+            </div>
+        </div>
+        <div class="block-content filter-content">
+            <?php echo $block->getChildHtml('state') ?>
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php  $wrapOptions = false;
+            $arr = $block->getFilters();
+            $tem = $arr[0];
+            // print_r($arr[0]);
+            if(array_key_exists(19, $arr)) {
+            $arr[0] = $arr[19];
+            $arr[19] =$tem;
+            } else {
+                $arr = $arr;
+            } 
+            ?>
+            <?php foreach ($arr as $filter): ?>
+                <?php // if($filter->getName() == 'Category') { echo $filter->getItemsCount();  } ?>
+            <?php // echo $filter->getItemsCount(); ?>
+                <?php if ($filter->getItemsCount()): ?>
+                    <?php if (!$wrapOptions): ?>
+                        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php /* @escapeNotVerified */ echo __('Filter By') ?></strong>
+                        <?php $range = implode(' ', range(0, $filter->getItemsCount())); ?>
+                        <div class="filter-options" id="narrow-by-list">
+                    <?php  $wrapOptions = true; endif; ?>
+                    <div class="filter-options-item">
+                        <div data-role="title" class="filter-options-title"><?php /* @escapeNotVerified */ echo __($filter->getName()) ?></div>
+                        <div data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></div>
+                    </div>
+                <?php endif; ?>
+                <?php // echo $block->getChildBlock('renderer')->render($filter); ?>
+            <?php endforeach; ?>
+            <?php if ($wrapOptions): ?>
+                </div>
+            <?php else: ?>
+                <script>
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('#layered-filter-block').addClass('filter-no-options');
+                    });
+                </script>
+            <?php endif; ?>
+        </div>
+    </div>
+<script>
+    require([
+        'jquery',
+        'collapsible'
+    ], function ($) {
+        $(document).ready(function() {
+            $('button.cw-btn.cw-btn--default.cw-btn--half.btn-search-filter').click(function (e) {
+                $('.col-left-sidebar, .side-bar-pro').toggleClass('active-filter');
+            });
+            $('.filter-title').click(function (e) {
+            $('.col-left-sidebar, .side-bar-pro').removeClass('active-filter');
+            });
+            $('.filter-options-item li a').click(function (e) {
+            $('.col-left-sidebar, .side-bar-pro').removeClass('active-filter');
+            });
+            // $("#layered-filter-block").collapsible().collapsible("deactivate");
+            // $(".filter-options .filter-options-item:not(:first-child) .filter-options-title").attr('aria-expanded','false');
+            // $(".filter-options .filter-options-item:not(:first-child) .filter-options-content").hide().attr('aria-hidden','false');
+            /* setTimeout(function(){
+                $(".filter-options .filter-options-item:not(:first-child)").removeClass("active");
+                $(".filter-options .filter-options-item:not(:first-child) .filter-options-title").attr('aria-expanded','false');
+                $(".filter-options .filter-options-item:not(:first-child) .filter-options-content").hide().attr('aria-hidden','true');
+            }, 2000); */
+            
+        });
+    });
+</script>
+<?php endif; ?>

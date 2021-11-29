@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="header.content">
+            <block class="Magento\Framework\View\Element\Template" name="select-filter" as="select-filter"
+                       template="Magento_Theme::category/select-category.phtml"/>
+          </referenceBlock>
+        <referenceContainer name="sidebar.additional" remove="true" />
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceContainer name="page.top">
+           <!--  <block class="Magento\Cms\Block\Block" name="category.listing.banner" before="breadcrumbs">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">category-listing-banner</argument>
+                </arguments>
+            </block> -->
+              <block class="Magento\Catalog\Block\Category\View" name="category.description" template="category/description.phtml" before="breadcrumbs" />
+        </referenceContainer>
+
+        <referenceBlock name="category_desc_main_column" remove="true" />
+        <referenceContainer name="content">
+            <block class="Magento\Catalog\Block\Category\View" name="category_top_banner" template="Magento_Catalog::category/category-top-banner.phtml" before="category.products"/>
+
+            <block class="Magento\Catalog\Block\Category\View" name="category_top_slider" template="Magento_Catalog::category/category-top-slider.phtml" before="category.products"/>
+
+              <block class="Magento\Catalog\Block\Category\View" template="Magento_Catalog::category/category_description_footer.phtml" name="banner_category_ptk" after="category.products" />
+        </referenceContainer>
+
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/> 
+
+    </body>
+</page>

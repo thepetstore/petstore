@@ -1,0 +1,10 @@
+<?php
+$product = $block->getProduct();
+?>
+<?php 
+
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$filterManagerIngredients = $om->get('Magento\Cms\Model\Template\FilterProvider')->getPageFilter()->filter($product->getData('ingredients'));
+
+?>
+<?php echo $filterManagerIngredients; ?>

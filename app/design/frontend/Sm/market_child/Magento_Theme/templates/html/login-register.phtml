@@ -1,0 +1,16 @@
+
+<?php
+  $login_customer = $block->getLayout()->createBlock('Magento\Customer\Block\Account\Customer');
+ ?>
+
+<?php if ($login_customer->customerLoggedIn()): ?>
+<li>
+    <a href="<?php echo $this->getUrl('customer/account/logout') ?>"
+       title="<?php echo __('Logout') ?>"><?php echo __('Logout') ?></a>
+</li>
+<?php else: ?>
+<li>
+    <a href="<?php echo $this->getUrl('customer/account/login') ?>"
+       title="<?php echo __('Login') ?>"><?php echo __('Login/Register') ?></a>
+</li>
+<?php endif; ?>
